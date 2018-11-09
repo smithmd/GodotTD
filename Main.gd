@@ -14,7 +14,7 @@ func _on_Enemy_Walk_timeout():
 	#	path.set_unit_offset(path.get_unit_offset() + .01)
 		
 	for enemy in enemies:
-		enemy.get_parent().set_unit_offset(enemy.get_parent().get_unit_offset() + .001)
+		enemy.get_parent().set_offset(enemy.get_parent().get_offset() + 5)
 		enemy.position = enemy.get_parent().global_position
 
 func _on_Spawn_timeout():
@@ -30,6 +30,7 @@ func spawn_enemy():
 	var pf = PathFollow2D.new()
 	path.add_child(pf)
 	pf.set_name("PathFollow")
+	pf.set_offset(0)
 	print(path.get_children())
 	
 	# create a new Enemy and add it to the PathFollow2D
