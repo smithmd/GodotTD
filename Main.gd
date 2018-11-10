@@ -9,17 +9,16 @@ func _ready():
 	$Spawn.start()
 
 func _on_Enemy_Walk_timeout():
-	#for path in paths:
-	#	print("%: %", path, path.get_unit_offset())
-	#	path.set_unit_offset(path.get_unit_offset() + .01)
-		
 	for enemy in enemies:
 		enemy.get_parent().set_offset(enemy.get_parent().get_offset() + 5)
+		
+		# Deletes the enemy and it's PathFollow2D from the game
+		if (enemy.get_parent().get_unit_offset() >= 1.0):
+			remove_enemy(enemy)
 
 func _on_Spawn_timeout():
 	print("enemy count: ", enemies.size())
 	spawn_enemy()
-	#pass
 
 func spawn_enemy():
 	var paths = [$PathNorth, $PathSouth]
@@ -37,3 +36,8 @@ func spawn_enemy():
 	enemy.set_path_follow(pf)
 	enemies.append(enemy)
 	pf.add_child(enemy)
+	
+func remove_enemy(enemy):
+	enemy.get_parent().queue_free()
+	enemies.erase(enemy)
+	enemy.queue_free()
