@@ -15,7 +15,6 @@ func _on_Enemy_Walk_timeout():
 		
 	for enemy in enemies:
 		enemy.get_parent().set_offset(enemy.get_parent().get_offset() + 5)
-		enemy.position = enemy.get_parent().global_position
 
 func _on_Spawn_timeout():
 	print("enemy count: ", enemies.size())
@@ -38,4 +37,3 @@ func spawn_enemy():
 	enemy.set_path_follow(pf)
 	enemies.append(enemy)
 	pf.add_child(enemy)
-	enemy.position = pf.global_position
