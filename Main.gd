@@ -36,7 +36,7 @@ func spawn_enemy():
 	enemy.set_path_follow(pf)
 	enemies.append(enemy)
 	pf.add_child(enemy)
-	
+
 func remove_enemy(enemy):
 	enemy.get_parent().queue_free() # deletes the PathFollow2D that is this enemy's parent node
 	enemies.erase(enemy)
