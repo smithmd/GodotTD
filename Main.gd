@@ -58,9 +58,9 @@ func load_cards():
 		card_file.close()
 	
 		for card in card_data:
+			card_dictionary[int(card.number)] = add_unit_card(card)
 			if card.type == "unit":
 				unit_cards.append(add_unit_card(card))
-				card_dictionary[int(card.number)] = add_unit_card(card)
 			elif card.type == "enemy":
 				enemy_cards.append(add_unit_card(card))
 			else:
@@ -103,7 +103,7 @@ func save_deck():
 			"XP" : card.XP,
 			"level" : card.level
 		}
-		if index < player_deck.size():
+		if index < player_deck.size(): # There's also probably a better way to do this?
 			deck_file.store_line(to_json(card_info) + ",")
 		else:
 			deck_file.store_line(to_json(card_info))

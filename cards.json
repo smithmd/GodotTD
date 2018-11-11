@@ -6,9 +6,11 @@
         "type" : "unit",
         "unit_class" : "Archer",
         "primary_stat" : "DEX",
-        "stat_str" : 5,
-        "stat_dex" : 10,
-        "stat_int" : 5,
+        "base_str" : 5,
+        "base_dex" : 10,
+        "base_int" : 5,
+        "base_attack_speed" : 2,
+        "base_movement_speed" : 5,
         "hitpoints" : 100
     },
     {
@@ -18,9 +20,11 @@
         "type" : "unit",
         "unit_class" : "Fighter",
         "primary_stat" : "STR",
-        "stat_str" : 10,
-        "stat_dex" : 5,
-        "stat_int" : 5,
+        "base_str" : 10,
+        "base_dex" : 5,
+        "base_int" : 5,
+        "base_attack_speed" : 1,
+        "base_movement_speed" : 5,
         "hitpoints" : 100
     },
     {
@@ -30,9 +34,11 @@
         "type" : "unit",
         "unit_class" : "Wizard",
         "primary_stat" : "INT",
-        "stat_str" : 5,
-        "stat_dex" : 5,
-        "stat_int" : 10,
+        "base_str" : 5,
+        "base_dex" : 5,
+        "base_int" : 10,
+        "base_attack_speed" : 1,
+        "base_movement_speed" : 5,
         "hitpoints" : 100
     },
     {
@@ -42,9 +48,11 @@
         "type" : "enemy",
         "unit_class" : "Programmer",
         "primary_stat" : "STR",
-        "stat_str" : 6,
-        "stat_dex" : 5,
-        "stat_int" : 5,
+        "base_str" : 6,
+        "base_dex" : 5,
+        "base_int" : 5,
+        "base_attack_speed" : 1,
+        "base_movement_speed" : 5,
         "hitpoints" : 100
     }
 ]

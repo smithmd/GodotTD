@@ -7,7 +7,7 @@ var number
 var type
 
 # Cards gain XP and levels... but do they all gain XP and levels?
-var level = 1
+var level = 0
 var XP = 0
 
 func _ready():
