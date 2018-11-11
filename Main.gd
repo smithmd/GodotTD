@@ -116,7 +116,7 @@ func load_deck():
 	deck_file.open("deck.json", File.READ_WRITE)
 	var deck = parse_json(deck_file.get_as_text())
 	for card in deck:
-		var this_card = card_dictionary[int(card.number)]
+		var this_card = load("res://Unit.gd").new(card_dictionary[int(card.number)])
 		this_card.XP = card.XP
 		this_card.level = card.level
 		player_deck.append(this_card)
