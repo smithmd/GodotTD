@@ -10,7 +10,7 @@ func _ready():
 	spawn_enemy()
 	$Spawn.start()
 	load_cards()
-	battle(enemy_cards[0],unit_cards[0])
+	ground_battle(enemy_cards[0],unit_cards[0])
 
 func _on_Enemy_Walk_timeout():
 	for enemy in enemies:
@@ -48,24 +48,26 @@ func remove_enemy(enemy):
 
 func load_cards():
 	var card_file = File.new()
-	card_file.open("cards.json", File.READ) # Should probably add a check for file before opening?
-	var card_data = parse_json(card_file.get_as_text())
-	card_file.close()
+	if card_file.file_exists("res://cards.json"):
+		card_file.open("cards.json", File.READ)
+		var card_data = parse_json(card_file.get_as_text())
+		card_file.close()
 	
-	for card in card_data:
-		if card.type == "unit":
-			unit_cards.append(add_unit_card(card))
-		elif card.type == "enemy":
-			enemy_cards.append(add_unit_card(card))
-		else:
-			print("Opps! Not a card type: " + card.type)
+		for card in card_data:
+			if card.type == "unit":
+				unit_cards.append(add_unit_card(card))
+			elif card.type == "enemy":
+				enemy_cards.append(add_unit_card(card))
+			else:
+				print("Opps! Not a card type: " + card.type)
 
 func add_unit_card(card):
 	print("Adding unit card: " + card.card_name)
 	var unit = load("res://Unit.gd").new(card)
 	return unit
 
-func battle(enemy, unit):
+# Should this take a list of everyone on both sides?
+func ground_battle(enemy, unit):
 	# this is all temporary, need to add armor, speed, hitpoints, turns stuff like that...
 	var unit_attack = unit.attack()
 	var unit_defend = unit.defend()
@@ -76,9 +78,18 @@ func battle(enemy, unit):
 	
 	if unit_attack > enemy_defend:
 		print(unit.card_name + " Wins!")
+		unit.XP += 10 # XP for winning, really will only happen when they kill a unit
 	else:
 		print(unit.card_name + " Didn't win right away, so " + enemy.card_name + " gets to attack!")
 		if enemy_attack > unit_defend:
 			print(enemy.card_name + " Wins!")
 		else:
 			battle(enemy, unit)
+
+func save_deck():
+	var deck_file = File.new()
+
+	pass
+
+func load_deck():
+	pass
