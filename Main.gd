@@ -71,8 +71,8 @@ func battle(enemy, unit):
 	var unit_defend = unit.defend()
 	var enemy_attack = enemy.attack()
 	var enemy_defend = enemy.defend()
-	print("Unit Attack " + String(unit_attack) + " Defend " + String(unit_defend))
-	print("Enemy Attack " + String(enemy_attack) + " Defend " + String(enemy_defend))
+	print(unit.card_name + " Attack " + String(unit_attack) + " Defend " + String(unit_defend))
+	print(enemy.card_name + " Attack " + String(enemy_attack) + " Defend " + String(enemy_defend))
 	
 	if unit_attack > enemy_defend:
 		print(unit.card_name + " Wins!")
