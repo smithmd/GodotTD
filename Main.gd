@@ -2,11 +2,16 @@ extends Node2D
 
 export (PackedScene) var Enemy
 var enemies = []
+var unit_cards = []
+var enemy_cards = []
 
 func _ready():
 	randomize()
 	spawn_enemy()
 	$Spawn.start()
+	load_cards()
+	print("Enemy Cards " + String(enemy_cards.size()))
+	print("Unit Cards " + String(unit_cards.size()))
 
 func _on_Enemy_Walk_timeout():
 	#for path in paths:
@@ -37,3 +42,23 @@ func spawn_enemy():
 	enemy.set_path_follow(pf)
 	enemies.append(enemy)
 	pf.add_child(enemy)
+
+func load_cards():
+	var card_file = File.new()
+	card_file.open("cards.json", File.READ) # Should probably add a check for file before opening?
+	var card_data = parse_json(card_file.get_as_text())
+	card_file.close()
+	
+	for card in card_data:
+		if card.type == "unit":
+			unit_cards.append(add_unit_card(card))
+		elif card.type == "enemy":
+			enemy_cards.append(add_unit_card(card))
+		else:
+			print("Opps! Not a card type: " + card.type)
+
+
+func add_unit_card(card):
+	print("Adding unit card: " + card.card_name)
+	var unit = load("res://Unit.gd").new(card)
+	return unit

@@ -1,0 +1,46 @@
+[
+    {
+        "card_name" : "Robyn Good",
+        "GFX" : "card.file",
+        "number" : 0,
+        "type" : "unit",
+        "unitClass" : "Archer",
+        "primaryStat" : "statDEX",
+        "statSTR" : 5,
+        "statDEX" : 10,
+        "statINT" : 5
+    },
+    {
+        "card_name" : "Apollo Greed",
+        "GFX" : "card.file",
+        "number" : 1,
+        "type" : "unit",
+        "unitClass" : "Fighter",
+        "primaryStat" : "statSTR",
+        "statSTR" : 10,
+        "statDEX" : 5,
+        "statINT" : 5
+    },
+    {
+        "card_name" : "Harry Otter",
+        "GFX" : "card.file",
+        "number" : 2,
+        "type" : "unit",
+        "unitClass" : "Wizard",
+        "primaryStat" : "statINT",
+        "statSTR" : 5,
+        "statDEX" : 5,
+        "statINT" : 10
+    },
+    {
+        "card_name" : "Mike Smith",
+        "GFX" : "card.file",
+        "number" : 3,
+        "type" : "enemy",
+        "unitClass" : "Programmer",
+        "primaryStat" : "statSTR",
+        "statSTR" : 6,
+        "statDEX" : 5,
+        "statINT" : 5
+    }
+]
