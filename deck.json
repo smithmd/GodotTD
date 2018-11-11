@@ -1,0 +1,5 @@
+[
+{"GFX":"card.file","XP":10,"card_name":"Robyn Good","hitpoints":100,"level":1,"number":0,"primary_stat":"DEX","stat_dex":10,"stat_int":5,"stat_str":5,"type":"unit","unit_class":"Archer"},
+{"GFX":"card.file","XP":0,"card_name":"Apollo Greed","hitpoints":100,"level":1,"number":1,"primary_stat":"STR","stat_dex":5,"stat_int":5,"stat_str":10,"type":"unit","unit_class":"Fighter"},
+{"GFX":"card.file","XP":0,"card_name":"Harry Otter","hitpoints":100,"level":1,"number":2,"primary_stat":"INT","stat_dex":5,"stat_int":10,"stat_str":5,"type":"unit","unit_class":"Wizard"}
+]
