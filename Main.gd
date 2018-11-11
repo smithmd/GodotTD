@@ -3,16 +3,17 @@ extends Node2D
 export (PackedScene) var Enemy
 var enemies = []
 var unit_cards = []
+var card_dictionary = {}
 var enemy_cards = []
 var player_deck = []
 
 func _ready():
-	load_deck()
 	randomize()
 	spawn_enemy()
 	$Spawn.start()
 	load_cards()
-	ground_battle(enemy_cards[0],unit_cards[0])
+	load_deck()
+	ground_battle(enemy_cards[0],player_deck[0])
 	save_deck()
 
 func _on_Enemy_Walk_timeout():
@@ -59,6 +60,7 @@ func load_cards():
 		for card in card_data:
 			if card.type == "unit":
 				unit_cards.append(add_unit_card(card))
+				card_dictionary[int(card.number)] = add_unit_card(card)
 			elif card.type == "enemy":
 				enemy_cards.append(add_unit_card(card))
 			else:
@@ -96,18 +98,8 @@ func save_deck():
 	deck_file.store_line("[")
 	for card in player_deck:
 		index += 1
-		# Do we just save level and XP? or whole card?
 		var card_info = {
-			"card_name" : card.card_name,
-			"GFX" : card.GFX,
 			"number" : card.number,
-			"type" : card.type,
-			"stat_int" : card.stat_int,
-			"stat_dex" : card.stat_dex,
-			"stat_str" : card.stat_str,
-			"unit_class" : card.unit_class,
-			"primary_stat" : card.primary_stat,
-			"hitpoints" : card.hitpoints,
 			"XP" : card.XP,
 			"level" : card.level
 		}
@@ -119,7 +111,13 @@ func save_deck():
 	deck_file.close()
 
 func load_deck():
+	print("Loading deck!")
 	var deck_file = File.new()
 	deck_file.open("deck.json", File.READ_WRITE)
-	player_deck = parse_json(deck_file.get_as_text())
+	var deck = parse_json(deck_file.get_as_text())
+	for card in deck:
+		var this_card = card_dictionary[int(card.number)]
+		this_card.XP = card.XP
+		this_card.level = card.level
+		player_deck.append(this_card)
 	deck_file.close()
