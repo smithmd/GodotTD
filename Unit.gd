@@ -5,7 +5,10 @@ var base_int
 var base_dex
 var base_str
 var base_attack_speed
+var base_attack_range
 var base_movement_speed
+var base_armor
+var armor_type
 var hitpoints
 var unit_class
 var primary_stat
@@ -21,6 +24,9 @@ func _init(card):
 	self.base_str = card.base_str
 	self.base_movement_speed = card.base_movement_speed
 	self.base_attack_speed = card.base_attack_speed
+	self.base_attack_range = card.base_attack_range
+	self.base_armor = card.base_armor
+	self.armor_type = card.armor_type
 	self.unit_class = card.unit_class
 	self.primary_stat = card.primary_stat
 	self.hitpoints = card.hitpoints
