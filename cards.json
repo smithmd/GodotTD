@@ -4,43 +4,47 @@
         "GFX" : "card.file",
         "number" : 0,
         "type" : "unit",
-        "unitClass" : "Archer",
-        "primaryStat" : "statDEX",
-        "statSTR" : 5,
-        "statDEX" : 10,
-        "statINT" : 5
+        "unit_class" : "Archer",
+        "primary_stat" : "statDEX",
+        "stat_str" : 5,
+        "stat_dex" : 10,
+        "stat_int" : 5,
+        "hitpoints" : 100
     },
     {
         "card_name" : "Apollo Greed",
         "GFX" : "card.file",
         "number" : 1,
         "type" : "unit",
-        "unitClass" : "Fighter",
-        "primaryStat" : "statSTR",
-        "statSTR" : 10,
-        "statDEX" : 5,
-        "statINT" : 5
+        "unit_class" : "Fighter",
+        "primary_stat" : "statSTR",
+        "stat_str" : 10,
+        "stat_dex" : 5,
+        "stat_int" : 5,
+        "hitpoints" : 100
     },
     {
         "card_name" : "Harry Otter",
         "GFX" : "card.file",
         "number" : 2,
         "type" : "unit",
-        "unitClass" : "Wizard",
-        "primaryStat" : "statINT",
-        "statSTR" : 5,
-        "statDEX" : 5,
-        "statINT" : 10
+        "unit_class" : "Wizard",
+        "primary_stat" : "statINT",
+        "stat_str" : 5,
+        "stat_dex" : 5,
+        "stat_int" : 10,
+        "hitpoints" : 100
     },
     {
         "card_name" : "Mike Smith",
         "GFX" : "card.file",
         "number" : 3,
         "type" : "enemy",
-        "unitClass" : "Programmer",
-        "primaryStat" : "statSTR",
-        "statSTR" : 6,
-        "statDEX" : 5,
-        "statINT" : 5
+        "unit_class" : "Programmer",
+        "primary_stat" : "statSTR",
+        "stat_str" : 6,
+        "stat_dex" : 5,
+        "stat_int" : 5,
+        "hitpoints" : 100
     }
 ]
