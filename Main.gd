@@ -10,8 +10,7 @@ func _ready():
 	spawn_enemy()
 	$Spawn.start()
 	load_cards()
-	print("Enemy Cards " + String(enemy_cards.size()))
-	print("Unit Cards " + String(unit_cards.size()))
+	battle(enemy_cards[0],unit_cards[0])
 
 func _on_Enemy_Walk_timeout():
 	for enemy in enemies:
@@ -65,3 +64,21 @@ func add_unit_card(card):
 	print("Adding unit card: " + card.card_name)
 	var unit = load("res://Unit.gd").new(card)
 	return unit
+
+func battle(enemy, unit):
+	# this is all temporary, need to add armor, speed, hitpoints, turns stuff like that...
+	var unit_attack = unit.attack()
+	var unit_defend = unit.defend()
+	var enemy_attack = enemy.attack()
+	var enemy_defend = enemy.defend()
+	print("Unit Attack " + String(unit_attack) + " Defend " + String(unit_defend))
+	print("Enemy Attack " + String(enemy_attack) + " Defend " + String(enemy_defend))
+	
+	if unit_attack > enemy_defend:
+		print(unit.card_name + " Wins!")
+	else:
+		print(unit.card_name + " Didn't win right away, so " + enemy.card_name + " gets to attack!")
+		if enemy_attack > unit_defend:
+			print(enemy.card_name + " Wins!")
+		else:
+			battle(enemy, unit)

@@ -25,7 +25,17 @@ func _ready():
 	print("Add unit!")
 
 func attack():
-	pass
+	var attack_power
+	match primary_stat:
+		"STR":
+			attack_power = stat_str
+		"INT":
+			attack_power = stat_int
+		"DEX":
+			attack_power = stat_dex
+	return attack_power
 
 func defend():
-	pass
+	var stat_defense = int(stat_str + stat_dex)
+	var defense = randi() % stat_defense
+	return defense

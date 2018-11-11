@@ -12,6 +12,3 @@ var XP
 
 func _ready():
 	print("Card added! " + card_name)
-	# Called when the node is added to the scene for the first time.
-	# Initialization here
-	pass
