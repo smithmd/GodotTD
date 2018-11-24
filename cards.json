@@ -66,5 +66,19 @@
         "armor_type" : "Leather",
         "base_movement_speed" : 5,
         "hitpoints" : 100
+    },
+    {
+        "card_name" : "Frost Spll",
+        "GFX" : "card.file",
+        "number" : 4,
+        "type" : "enhancement",
+        "modify_int" : 0,
+        "modify_dex" : 0,
+        "modify_str" : 0,
+        "modify_attack_speed" : -2,
+        "modify_attack_range" : 0,
+        "modify_movement_speed" : -2,
+        "modify_armor" : 0,
+        "modify_type" : "debuff"
     }
 ]

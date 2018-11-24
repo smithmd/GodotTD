@@ -3,6 +3,7 @@ extends Node2D
 export (PackedScene) var Enemy
 var enemies = []
 var unit_cards = []
+var enhancement_cards = []
 var card_dictionary = {}
 var enemy_cards = []
 var player_deck = []
@@ -58,11 +59,16 @@ func load_cards():
 		card_file.close()
 	
 		for card in card_data:
-			card_dictionary[int(card.number)] = add_unit_card(card)
+
 			if card.type == "unit":
+				card_dictionary[int(card.number)] = add_unit_card(card)
 				unit_cards.append(add_unit_card(card))
 			elif card.type == "enemy":
+				card_dictionary[int(card.number)] = add_unit_card(card)
 				enemy_cards.append(add_unit_card(card))
+			elif card.type == "enhancement":
+				card_dictionary[int(card.number)] = add_enhancement_card(card)
+				enhancement_cards.append(add_enhancement_card(card))
 			else:
 				print("Opps! Not a card type: " + card.type)
 
@@ -70,6 +76,11 @@ func add_unit_card(card):
 	print("Adding unit card: " + card.card_name)
 	var unit = load("res://Unit.gd").new(card)
 	return unit
+
+func add_enhancement_card(card):
+	print("Adding enhancement card: " + card.card_name)
+	var enhancement = load("res://Enhancement.gd").new(card)
+	return enhancement
 
 # Should this take a list of everyone on both sides?
 func ground_battle(enemy, unit):
