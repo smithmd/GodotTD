@@ -1,0 +1,15 @@
+[
+    {
+        "story":"The level story or whatever...",
+        "objective":"kill all the bad guys",
+        "number":1,
+        "time":100,
+        "enemy_deck": [
+            {"number":3,"level":1},
+            {"number":3,"level":1},
+            {"number":3,"level":1},
+            {"number":3,"level":1},
+            {"number":3,"level":2}
+        ]
+    }
+    ]

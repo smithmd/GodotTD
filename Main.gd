@@ -1,19 +1,29 @@
 extends Node2D
 
 export (PackedScene) var Enemy
-var enemies = []
-var unit_cards = []
-var enhancement_cards = []
-var card_dictionary = {}
-var enemy_cards = []
-var player_deck = []
+var enemies = [] 
+var unit_cards = [] # Possible unit cards
+var enhancement_cards = [] # Possible enhancement cards
+var card_dictionary = {} # All possible cards
+var enemy_cards = [] # Possible enemy unit cards
+var player_deck = [] # Player's current cards
+var levels = {} # All the levels
+var current_enemy_deck = []
+var current_enemy
+var current_level # This will probably load off the save or be changed when they pick a level?
+var current_story
+var current_objective
+var current_time_limit
+var current_time
 
 func _ready():
 	randomize()
-	spawn_enemy()
-	$Spawn.start()
 	load_cards()
+	load_levels()
+	load_current_level()
 	load_deck()
+#	spawn_enemy()
+	$Spawn.start()
 	ground_battle(enemy_cards[0],player_deck[0])
 	save_deck()
 
@@ -27,9 +37,12 @@ func _on_Enemy_Walk_timeout():
 
 func _on_Spawn_timeout():
 	print("enemy count: ", enemies.size())
-	spawn_enemy()
+	if current_enemy < current_enemy_deck.size():
+		spawn_enemy(current_enemy_deck[current_enemy])
+		current_enemy = current_enemy + 1
 
-func spawn_enemy():
+func spawn_enemy(enemy_card):
+	print("Spawning enemy: " + enemy_card.card_name)
 	var paths = [$PathNorth, $PathSouth]
 	var path = paths[randi() % paths.size()]
 	
@@ -51,6 +64,27 @@ func remove_enemy(enemy):
 	enemies.erase(enemy)
 	enemy.queue_free()
 
+func load_levels():
+	var level_file = File.new()
+	if level_file.file_exists("res://levels.json"):
+		level_file.open("levels.json", File.READ)
+		var level_data = parse_json(level_file.get_as_text())
+		level_file.close()
+		
+		for level in level_data:
+			levels[int(level.number)] = add_level(level)
+		
+		print("Done loading levels: " + String(levels))
+
+func load_current_level():
+	if current_level == null || current_level > levels.size(): # Might be a better way to handle unknown level
+		current_level = 1
+	current_time_limit = levels[current_level].time
+	current_story = levels[current_level].story
+	current_objective = levels[current_level].objective
+	current_enemy_deck = levels[current_level].enemy_deck
+	current_enemy = 0 # Start with the first card in the enemy deck
+
 func load_cards():
 	var card_file = File.new()
 	if card_file.file_exists("res://cards.json"):
@@ -71,6 +105,22 @@ func load_cards():
 				enhancement_cards.append(add_enhancement_card(card))
 			else:
 				print("Opps! Not a card type: " + card.type)
+
+func add_level(level):
+	print("Adding level: " + String(level.number))
+	var new_level = {}
+	new_level.story = level.story
+	new_level.objective = level.objective
+	new_level.number = level.number
+	new_level.time = level.time
+	var deck = []
+	for card in level.enemy_deck:
+		print("loading enemy card: " + String(card.number) + " level " + String(card.level))
+		var this_card = load("res://Unit.gd").new(card_dictionary[int(card.number)])
+		this_card.level = card.level
+		deck.append(this_card)
+	new_level.enemy_deck = deck
+	return new_level
 
 func add_unit_card(card):
 	print("Adding unit card: " + card.card_name)

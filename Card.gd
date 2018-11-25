@@ -13,4 +13,5 @@ var XP = 0
 func _ready():
 	print("Card added! " + card_name)
 
-# Enhancement types Fire Arrows, Cold Spell, Shield, Cannon
+func get_type():
+	return type
