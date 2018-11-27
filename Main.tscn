@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://Enemy.tscn" type="PackedScene" id=2]
 [ext_resource path="res://GroundTextures.tres" type="TileSet" id=3]
+[ext_resource path="res://FantasyTextures.tres" type="TileSet" id=4]
 
 [sub_resource type="Curve2D" id=1]
 
@@ -18,7 +19,7 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, -1.32684, 1.32684, 0, 0, 0, 0, 188.411, 0, 0, 0, 0, 0, 195.709, 325.076, 0, 0, 0, 0, 319.105, 316.451, 0, 0, 0, 0, 318.442, 256.08, 0, 0, 0, 0, 383.457, 250.109, 0, 0, 0, 0, 383.457, 68.9957, 0, 0, 0, 0, 575.849, 61.6981, 0, 0, 0, 0, 574.522, 3.31711, 0, 0, 0, 0, 705.879, -4.64394, 0, 0, 0, 0, 701.235, -59.7078, 0, 0, 0, 0, 759.616, -67.6689, 0, 0, 0, 0, 772.221, -0.663422, 0, 0, 0, 0, 829.275, -2.65368 )
 }
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform", "Z Index" ]
@@ -94,6 +95,27 @@ process_mode = 1
 wait_time = 1.0
 one_shot = false
 autostart = false
+
+[node name="TileMapFantasyGround" type="TileMap" parent="." index="5"]
+
+mode = 0
+tile_set = ExtResource( 4 )
+cell_size = Vector2( 16, 16 )
+cell_quadrant_size = 16
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+cell_half_offset = 2
+cell_tile_origin = 0
+cell_y_sort = false
+cell_clip_uv = false
+collision_use_kinematic = false
+collision_friction = 1.0
+collision_bounce = 0.0
+collision_layer = 1
+collision_mask = 1
+occluder_light_mask = 1
+format = 1
+tile_data = PoolIntArray( 0, 0, 0, 1, 2, 0, 2, 0, 0, 3, 2, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 1, 0, 65536, 0, 0, 65537, 1, 0, 65538, 0, 0, 65539, 1, 0, 65540, 0, 0, 65541, 1, 0, 65542, 1, 0, 65543, 2, 0, 131072, 2, 0, 131073, 0, 0, 131074, 0, 0, 131075, 0, 0, 131076, 0, 0, 131077, 0, 0, 131078, 0, 0, 131079, 0, 0, 196608, 0, 0, 196609, 0, 0, 196610, 1, 0, 196611, 0, 0, 196612, 0, 0, 196613, 1, 0, 196614, 2, 0, 196615, 0, 0 )
+_sections_unfolded = [ "Cell" ]
 
 [connection signal="timeout" from="Enemy_Walk" to="." method="_on_Enemy_Walk_timeout"]
 
