@@ -8,7 +8,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 16.2192, 16.0577 )
 
-[node name="Enemy" type="RigidBody2D"]
+[node name="Enemy" type="RigidBody2D" index="0"]
 
 input_pickable = false
 collision_layer = 1
@@ -30,8 +30,7 @@ angular_velocity = 0.0
 angular_damp = -1.0
 script = ExtResource( 1 )
 _sections_unfolded = [ "Collision" ]
-min_speed = null
-max_speed = null
+Card = null
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 

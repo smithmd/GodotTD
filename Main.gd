@@ -7,12 +7,14 @@ var card_dictionary = {}
 var enemy_cards = []
 var player_deck = []
 
+func _init():
+	load_cards()
+	load_deck()
+
 func _ready():
 	randomize()
 	spawn_enemy()
 	$Spawn.start()
-	load_cards()
-	load_deck()
 	ground_battle(enemy_cards[0],player_deck[0])
 	save_deck()
 
@@ -22,6 +24,7 @@ func _on_Enemy_Walk_timeout():
 		
 		# Deletes the enemy and it's PathFollow2D from the game
 		if (enemy.get_parent().get_unit_offset() >= 1.0):
+			# handle_damage()
 			remove_enemy(enemy)
 
 func _on_Spawn_timeout():
@@ -41,7 +44,6 @@ func spawn_enemy():
 	
 	# create a new Enemy and add it to the PathFollow2D
 	var enemy = Enemy.instance()
-	enemy.set_path_follow(pf)
 	enemies.append(enemy)
 	pf.add_child(enemy)
 
