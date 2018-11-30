@@ -1,6 +1,7 @@
 extends Node2D
 
 export (PackedScene) var Enemy
+var player_health = 20
 var enemies = [] 
 var unit_cards = [] # Possible unit cards
 var enhancement_cards = [] # Possible enhancement cards
@@ -22,6 +23,7 @@ func _ready():
 	load_levels()
 	load_current_level()
 	load_deck()
+	update_gui()
 #	spawn_enemy()
 	$Spawn.start()
 	ground_battle(enemy_cards[0],player_deck[0])
@@ -33,6 +35,7 @@ func _on_Enemy_Walk_timeout():
 		
 		# Deletes the enemy and it's PathFollow2D from the game
 		if (enemy.get_parent().get_unit_offset() >= 1.0):
+			player_hit()
 			remove_enemy(enemy)
 
 func _on_Spawn_timeout():
@@ -56,6 +59,7 @@ func spawn_enemy(enemy_card):
 	# create a new Enemy and add it to the PathFollow2D
 	var enemy = Enemy.instance()
 	enemy.set_path_follow(pf)
+	enemy.set_card(enemy_card)
 	enemies.append(enemy)
 	pf.add_child(enemy)
 
@@ -63,6 +67,13 @@ func remove_enemy(enemy):
 	enemy.get_parent().queue_free() # deletes the PathFollow2D that is this enemy's parent node
 	enemies.erase(enemy)
 	enemy.queue_free()
+
+func player_hit():
+	player_health = player_health - 1
+	update_gui()
+
+func update_gui():
+	$HealthCounter.text = str(player_health)
 
 func load_levels():
 	var level_file = File.new()
@@ -93,7 +104,6 @@ func load_cards():
 		card_file.close()
 	
 		for card in card_data:
-
 			if card.type == "unit":
 				card_dictionary[int(card.number)] = add_unit_card(card)
 				unit_cards.append(add_unit_card(card))
